@@ -8,7 +8,12 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
 class Widgets(Widget):
-    pass
+    def on_touch_down(self, touch):
+        print(touch)
+    def on_touch_move(self, touch):
+        print(touch)
+    def on_touch_up(self, touch):
+        print("RELEASED!",touch)
 
 class LoginScreen(GridLayout):
 
@@ -26,7 +31,7 @@ class LoginScreen(GridLayout):
 class widgets2(App):
 
     def build(self):
-        return LoginScreen()
+        return Widgets()
 
 
 if __name__ == '__main__':
