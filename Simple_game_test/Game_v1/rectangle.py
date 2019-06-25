@@ -31,7 +31,7 @@ class Rectangle():
         rectangle_par.obj.top = rectangle_par.obj.top + moveY
 
     @staticmethod
-    def draw_objectt(screen, rectangle_par, color):
+    def draw_object(screen, rectangle_par, color):
         pygame.draw.rect(screen, color, rectangle_par)
 
     @staticmethod
