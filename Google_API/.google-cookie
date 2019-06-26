@@ -1,0 +1,13 @@
+#LWP-Cookies-2.0
+Set-Cookie3: 1P_JAR="2019-06-23-18"; path="/"; domain=".google.co.in"; path_spec; domain_dot; expires="2019-07-23 18:06:46Z"; version=0
+Set-Cookie3: NID="186=TKjg3v96PvyLa-KzT4ZuYi97xVqcqzwLc8RYpOiNgiPntyIE6Ubb7w50olitoWJka4Odc5ah8kUd-cDDt0yEpEpoQM3W3LqAsSezrtoz00Pq6uPWFP3m1DugdfMSyAXdnJIyjKId_8KJLJblKpdOSsdU1qDeEcTBSjzD1I8wcZc"; path="/"; domain=".google.co.in"; path_spec; domain_dot; expires="2019-12-23 15:16:29Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/complete/search"; domain=".google.co.in"; path_spec; domain_dot; expires="2019-12-20 15:16:29Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/search"; domain=".google.co.in"; path_spec; domain_dot; expires="2019-12-20 15:16:29Z"; HttpOnly=None; version=0
+Set-Cookie3: 1P_JAR="2019-06-23-18"; path="/"; domain=".google.com"; path_spec; domain_dot; expires="2019-07-23 18:14:24Z"; version=0
+Set-Cookie3: NID="186=WQf4IAdRJ1NogqHDliVSF-smaExCuJOnJfZO2CE9D3FRWw3WaFU2bcsmNadwtbBJZjB7CyX7NT7B_HJrDzh4xgvYwlND7oHMUrKYwztOCcgyfN85dlpDRlDiXEdYJr1f-TnnO4DCvbNTvKZjc-E3ku5I2HVeI0xoM54Rk9mnDVQ"; path="/"; domain=".google.com"; path_spec; domain_dot; expires="2019-12-23 15:14:54Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/complete/search"; domain=".google.com"; path_spec; domain_dot; expires="2019-12-20 15:14:54Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/search"; domain=".google.com"; path_spec; domain_dot; expires="2019-12-20 15:14:54Z"; HttpOnly=None; version=0
+Set-Cookie3: 1P_JAR="2019-06-23-15"; path="/"; domain=".google.pl"; path_spec; domain_dot; expires="2019-07-23 15:41:07Z"; version=0
+Set-Cookie3: NID="186=ie02utCDo5dlns0CbNkkforSfILhdoU48VfgkPJGie6K64JUiwzBi3fNBq66qlDe-3dWMbdWL6FmzKbDn5Qd7mXHtChCCCqaG4aFDhxWvcJdveheNlD015s0ftsugS7RAGLuchF94N1pdl_jJYnv0QA6PWTASOR3Udh3Sy_Od4o"; path="/"; domain=".google.pl"; path_spec; domain_dot; expires="2019-12-23 15:16:49Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/complete/search"; domain=".google.pl"; path_spec; domain_dot; expires="2019-12-20 15:16:49Z"; HttpOnly=None; version=0
+Set-Cookie3: CGIC=""; path="/search"; domain=".google.pl"; path_spec; domain_dot; expires="2019-12-20 15:16:49Z"; HttpOnly=None; version=0
