@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Nazwa strony test test test</title>
+  <link href="bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="dataTables.min.css" rel="stylesheet">
+  <link href="login.css" rel="stylesheet" >
+<style>
+tbody tr:hover {
+    cursor: pointer;
+    background-color: rgb(210,210,210) !important;
+
+}
+</style>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employee info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+       <div class="form-group"><label>Imie</label><input class="form-control" name="name"/></div>
+       <div class="form-group"><label>Nazwisko</label><input class="form-control"  name="lastname"/></div>
+       <div class="form-group"><label>Pensja</label><input class="form-control" name="salary"/></div>
+       <div class="form-group"><label>Wynagrodzenie za miesiąc xxx</label><input class="form-control" name="salary2"/></div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{resp}}</td>
+                    <td>Name</td>
+                    <td>{{item}}</td>
+                    <td>{{item}}</td>
+                    <td>{{item}}</td>
+                    <td>{{item}}</td>
+                </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="dataTables.min.js"></script>
+<script src="dataTables.bootstrap.min.js"></script>
+<script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+        $('tr').click(function(){
+            $('#exampleModal').modal('show')
+            });
+</script>
+</body>
+</html>
