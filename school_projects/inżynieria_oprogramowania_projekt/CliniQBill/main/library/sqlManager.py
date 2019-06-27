@@ -1,4 +1,4 @@
-import MySQLdb
+import pymysql as MySQLdb
 
 def main():
    print(dbManagement.getInfoFromdb(dbManagement))

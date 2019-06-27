@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from subprocess import Popen
-import os
+import sys, os
+sys.path.insert(0, os.path.abspath('main\library'))
+from .library import sqlManager
 
 def home(response):
-    resp = Popen('python '+ os.path.abspath('main\library\sqlManager.py')).stdout
-    vars_to_pass = {"resp":str(resp)}
+    resp = sqlManager.dbManagement.getInfoFromdb(sqlManager.dbManagement)
+    vars_to_pass = {"resp":resp}
     return render(response, "main/home.html", vars_to_pass)
