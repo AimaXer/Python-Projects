@@ -54,6 +54,8 @@ class GUI():
                 rectangle = Rect.rectangle(i)
                 Rect.rectDraw(screen, rectangle)
 
+                ran_move_x = random.randint(-10, 10)
+                ran_move_y = random.randint(-10, 10)
                 for x in range(0, 10):
                     keys = pygame.key.get_pressed()
                     if keys[pygame.K_LEFT]:
@@ -65,9 +67,9 @@ class GUI():
                     if keys[pygame.K_DOWN]:
                         rects_pos[x][1] += 1
 
-                    if iterator % 10 == 0:
-                        ran_move_x = random.randint(-2, 2)
-                        ran_move_y = random.randint(-2, 2)
+                    if random.randint(0,2) > 1:
+                        ran_move_x = random.randint(-10, 10)
+                        ran_move_y = random.randint(-10, 10)
 
                     rects_pos[x][0] += ran_move_x
                     rects_pos[x][1] += ran_move_y
@@ -75,7 +77,7 @@ class GUI():
                 i = GUI.check_outerlines_collision(i)
                 iterator += 1
             pygame.display.flip()
-            pygame.time.Clock().tick(60)
+            pygame.time.Clock().tick(30)
             screen.fill((0,0,0))
 
 if __name__ == '__main__':
