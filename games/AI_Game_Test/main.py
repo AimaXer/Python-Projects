@@ -1,7 +1,9 @@
 
 import pygame
+import time
 import random
 from AI_module.AI_main import main as AI
+from Screens.start import main as start
 
 #GLOBAL VARS
 screen_width = 1000
@@ -43,6 +45,8 @@ class GUI():
     @staticmethod
     def main_function():
 
+         start.main(screen, screen_width, screen_height)
+
          while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -74,11 +78,16 @@ class GUI():
                     rects_pos[x][0] += ran_move_x
                     rects_pos[x][1] += ran_move_y
 
-                i = GUI.check_outerlines_collision(i)
+                GUI.check_outerlines_collision(i)
                 iterator += 1
+
+
+            AI.main()
+
             pygame.display.flip()
             pygame.time.Clock().tick(30)
             screen.fill((0,0,0))
+
 
 if __name__ == '__main__':
     GUI.main_function()
