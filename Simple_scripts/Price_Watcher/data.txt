@@ -1,0 +1,9 @@
+{
+	"data":[{
+		"link": "https://allegro.pl/oferta/apple-macbook-pro-13-2017-i7-16gb-a1706-bcm-8369028368",
+		"price": "1000"
+	},{
+		"link": "https://allegro.pl/oferta/macbook-pro-11-1-i5-2x2-6ghz-8gb-13-3-128ssd-ud12-8395779616",
+		"price": "2000"
+	}]
+}
