@@ -3,10 +3,9 @@
     "",
     "\\big_projects",
     "\\big_projects\\AI_Stocks",
+    "\\big_projects\\AI_Stocks\\config",
     "\\big_projects\\AI_Stocks\\DATA",
-    "\\big_projects\\AI_Stocks\\libraries",
-    "\\Simple_scripts\\Scrapping",
-    "\\Simple_scripts\\Scrapping\\Stock_data"
+    "\\big_projects\\AI_Stocks\\libraries"
   ],
   "SelectedNode": "\\big_projects\\AI_Stocks\\main.py",
   "PreviewInSolutionExplorer": false
