@@ -1,0 +1,5 @@
+1. Pobieranie danych o przeszlości danego instrumentu inwestycyjnego.
+2. Konwesja danych na dane użyteczne dla modułu machine learning
+3. Nauka przez modułu AI określania na podstawie danych historycznych w jakich warunkach bardziej opłacalny jest zakup a w jakich sprzedaż,
+4. Pozyskiwanie danych co określony interwał czasu na temat aktualnych wartości danego instrumentu
+
