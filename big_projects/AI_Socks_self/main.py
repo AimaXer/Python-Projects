@@ -36,6 +36,62 @@ class DataManagement():
 # Config variables
 config_variables = DataManagement.loadConfig(DataManagement)
 
+class Calculations2():
+    def trendCalculation(self, partial_data):
+        change_sum = 0
+
+        for interator in range(0, len(partial_data) - 1):
+            change_sum += (partial_data[interator] - partial_data[interator + 1])
+        return change_sum / len(partial_data)
+
+    def main(self, data):
+        size = 10000
+        accuracy = 0
+        skipped_predictions = 0
+        predictions_made = 0
+        
+        print("\n" + str(datetime.now().time()) + " - STARTING CALCULATIONS - ")
+        with alive_bar(size) as bar:
+            for partial_data_iterator in range(len(data) - config_variables['COMPARE_RANGE'] - size, len(data) - config_variables['COMPARE_RANGE']):
+                # data partitioning
+                partial_data_high = [data[config_variables['MAIN_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator, partial_data_iterator + config_variables['COMPARE_RANGE'] - 1)]
+                partial_data_low = [data[config_variables['COMPARE_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator, partial_data_iterator +  config_variables['COMPARE_RANGE'] - 1)]
+
+                UDS_partial_trend = round(self.trendCalculation(partial_data_high), 4)
+
+                if UDS_partial_trend > 0:
+                    predictions_made += 1
+                    acc_aded = False
+                    for iterator in range(1, config_variables['MAX_HOURS_INTERVAL']):
+                        if len(data) > (partial_data_iterator + iterator + config_variables['COMPARE_RANGE']):
+                            if partial_data_low[len(partial_data_low) - 1] < (data[config_variables['MAIN_COLUMN_NAME']][partial_data_iterator + config_variables['COMPARE_RANGE'] + iterator] + (data[config_variables['MAIN_COLUMN_NAME']][partial_data_iterator + config_variables['COMPARE_RANGE'] + iterator] * config_variables['PROFIT_PROCENTAGE'] / 100)):
+                                if not acc_aded:  
+                                    accuracy += 1
+                                    acc_aded = True
+                    
+                elif UDS_partial_trend < 0:
+                    predictions_made += 1
+                    acc_aded = False
+                    for iterator in range(1, config_variables['MAX_HOURS_INTERVAL']):
+                        if len(data) > (partial_data_iterator + iterator + config_variables['COMPARE_RANGE']):
+                            if partial_data_high[len(partial_data_high) - 1] > (data[config_variables['COMPARE_COLUMN_NAME']][partial_data_iterator + config_variables['COMPARE_RANGE'] + iterator] - (data[config_variables['COMPARE_COLUMN_NAME']][partial_data_iterator + config_variables['COMPARE_RANGE'] + iterator] * config_variables['PROFIT_PROCENTAGE'] / 100)):
+                                if not acc_aded:  
+                                    accuracy += 1
+                                    acc_aded = True
+                else:
+                    skipped_predictions += 1
+
+                
+                bar()
+
+        print(str(datetime.now().time()) + " - CALCULATIONS COMPLETED - ")
+        if skipped_predictions == size:
+            result = 0
+        else:
+            result = accuracy / (size - skipped_predictions) * 100
+
+        return round(result, 2), round(predictions_made / size * 100, 2)
+
 class Calculations():
 
     def trendCalculation(self, partial_data):
@@ -65,64 +121,64 @@ class Calculations():
             return 1
         return 0
             
-
     def main(self, data):
         size = int(len(data[config_variables['MAIN_COLUMN_NAME']]) / config_variables['COMPARE_RANGE'])
         accuracy = 0
         skipped_predictions = 0
         predictions_made = 0
         
-        # print("\n" + str(datetime.now().time()) + " - STARTING CALCULATIONS - ")
-        # with alive_bar(size) as bar:
-        for partial_data_iterator in range(0, size):
-            # data partitioning
-            partial_data_high = [data[config_variables['MAIN_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator * config_variables['COMPARE_RANGE'], ((partial_data_iterator + 1) * config_variables['COMPARE_RANGE']) - 1)]
-            partial_data_low = [data[config_variables['COMPARE_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator * config_variables['COMPARE_RANGE'], ((partial_data_iterator + 1) * config_variables['COMPARE_RANGE']) - 1)]
+        print("\n" + str(datetime.now().time()) + " - STARTING CALCULATIONS - ")
+        with alive_bar(size) as bar:
+            for partial_data_iterator in range(0, size):
+                # data partitioning
+                partial_data_high = [data[config_variables['MAIN_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator * config_variables['COMPARE_RANGE'], ((partial_data_iterator + 1) * config_variables['COMPARE_RANGE']) - 1)]
+                partial_data_low = [data[config_variables['COMPARE_COLUMN_NAME']][iterator] for iterator in range(partial_data_iterator * config_variables['COMPARE_RANGE'], ((partial_data_iterator + 1) * config_variables['COMPARE_RANGE']) - 1)]
 
-            # avrage_partial_change_rate - avrage procentage change in data in COMPARE_RANGE for given range
-            avrage_partial_change_rate = round(self.changeCalculation(partial_data_high), 4)
+                # avrage_partial_change_rate - avrage procentage change in data in COMPARE_RANGE for given range
+                # avrage_partial_change_rate = round(self.changeCalculation(partial_data_high), 4)
 
-            # UDS_partial_trend - values - (range -1 : 1) 1 - down trend , 0 - stady trend , 1 - up trend 
-            UDS_partial_trend = round(self.trendCalculation(partial_data_high), 4)
+                # UDS_partial_trend - values - (range -1 : 1) 1 - down trend , 0 - stady trend , 1 - up trend 
+                UDS_partial_trend = round(self.trendCalculation(partial_data_high), 4)
 
-            # prediction - return values (1 (up) ,0 (none),-1 (down)) dependung on given procentage 
-            prediction = self.makePrediction(partial_data_high, partial_data_low, UDS_partial_trend, avrage_partial_change_rate)
+                # prediction - return values (1 (up) ,0 (none),-1 (down)) dependung on given procentage 
+                # prediction = self.makePrediction(partial_data_high, partial_data_low, UDS_partial_trend, avrage_partial_change_rate)
 
-            if prediction > 0:
-                predictions_made += 1
-                acc_aded = False
-                for iterator in range(0, config_variables['MAX_HOURS_INTERVAL']):
-                    if len(data) >= size * partial_data_iterator + iterator:
-                        if partial_data_low[len(partial_data_low) - 1] < data[config_variables['MAIN_COLUMN_NAME']][size * partial_data_iterator + iterator]:
-                            if not acc_aded:  
-                                accuracy += 1
-                                acc_aded = True
+                if UDS_partial_trend > 0:
+                    predictions_made += 1
+                    acc_aded = False
+                    for iterator in range(0, config_variables['MAX_HOURS_INTERVAL']):
+                        if len(data) >= size * partial_data_iterator + iterator:
+                            if partial_data_low[len(partial_data_low) - 1] < (data[config_variables['MAIN_COLUMN_NAME']][config_variables['COMPARE_RANGE'] * partial_data_iterator + iterator] + (data[config_variables['MAIN_COLUMN_NAME']][config_variables['COMPARE_RANGE'] * partial_data_iterator + iterator] * config_variables['PROFIT_PROCENTAGE'] / 100)):
+                                if not acc_aded:  
+                                    accuracy += 1
+                                    acc_aded = True
+                    
+                elif UDS_partial_trend < 0:
+                    predictions_made += 1
+                    acc_aded = False
+                    for iterator in range(0, config_variables['MAX_HOURS_INTERVAL']):
+                        if len(data) >= size * partial_data_iterator + iterator:
+                            if partial_data_high[len(partial_data_high) - 1] > (data[config_variables['COMPARE_COLUMN_NAME']][config_variables['COMPARE_RANGE'] * partial_data_iterator + iterator] - (data[config_variables['COMPARE_COLUMN_NAME']][config_variables['COMPARE_RANGE'] * partial_data_iterator + iterator] * config_variables['PROFIT_PROCENTAGE'] / 100)):
+                                if not acc_aded:  
+                                    accuracy += 1
+                                    acc_aded = True
+                else:
+                    skipped_predictions += 1
+
                 
-            elif prediction < 0:
-                predictions_made += 1
-                acc_aded = False
-                for iterator in range(0, config_variables['MAX_HOURS_INTERVAL']):
-                    if len(data) >= size * partial_data_iterator + iterator:
-                        if partial_data_high[len(partial_data_high) - 1] > data[config_variables['COMPARE_COLUMN_NAME']][size * partial_data_iterator + iterator]:
-                            if not acc_aded:  
-                                accuracy += 1
-                                acc_aded = True
-            else:
-                skipped_predictions += 1
+                bar()
 
-            
-            # bar()
-
-        # print(str(datetime.now().time()) + " - CALCULATIONS COMPLETED - ")
+        print(str(datetime.now().time()) + " - CALCULATIONS COMPLETED - ")
         if skipped_predictions == size:
             result = 0
         else:
             result = accuracy / (size - skipped_predictions) * 100
 
-        return round(result, 2), round(predictions_made / size * 100, 2)
+        return round(accuracy, 2), round(predictions_made / size * 100, 2)
 
 class MainFunctions():
 
+    # Searching for best parameters
     def bestSetFinding(self, data):
         best_accuracy = 0.0
         best_prediction_procentage = 0.0
@@ -160,10 +216,11 @@ class MainFunctions():
             print(str(datetime.now().time()) + "Error: Error in loadData - (" + str(e) + ")")
             return
         
-        accuracy, predictions_made, i1, i2, i3 = self.bestSetFinding(data)
+        # accuracy, predictions_made, i1, i2, i3 = self.bestSetFinding(data)
+        accuracy, predictions_made = Calculations2().main(data)
 
         print(" - Result (accuracy) : " + str(accuracy) + "% - \n" + " - Predictions made : " + str(predictions_made) + "% -")
-        print("\n - For variables : \n - COMPARE_RANGE : " + str(i1) + "\n - MAX_HOURS_INTERVAL : " + str(i2) + "\n - PROFIT_PROCENTAGE : " + str(i3)+ '\n')
+        # print("\n - For variables : \n - COMPARE_RANGE : " + str(i1) + "\n - MAX_HOURS_INTERVAL : " + str(i2) + "\n - PROFIT_PROCENTAGE : " + str(i3)+ '\n')
 
 if __name__ == '__main__':
     MainFunctions().main()
