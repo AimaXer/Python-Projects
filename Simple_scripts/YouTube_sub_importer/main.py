@@ -33,8 +33,8 @@ def check():
     for i in range(len(aima)):
         if aima[i] not in mac:
             roznica.append(aima[i])
-            print(aima[i])
-            # subBot(aima[i])
+            # print(aima[i])
+            subBot(aima[i])
 
     print(len(roznica))
 
